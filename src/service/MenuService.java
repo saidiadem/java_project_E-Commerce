@@ -3,7 +3,7 @@ package service;
 import java.util.Scanner;
 
 public class MenuService {
-    public static void displayMenu() {
+    public static void loginMenu() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\u001B[1m" + getFancyBorder());
@@ -14,22 +14,21 @@ public class MenuService {
         System.out.println("\u001B[36m2. Register\u001B[0m");
         System.out.println("\u001B[36m3. Quit\u001B[0m");
         System.out.print("Select option: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
+        String choice = scanner.nextLine();
         switch (choice) {
-            case 1:
+            case "1":
                 LoginService.handleLogin();
-                displayMenu();
+                loginMenu();
                 break;
-            case 2:
+            case "2":
                 RegisterService.handleRegister();
-                displayMenu();
+                loginMenu();
                 break;
-            case 3:
+            case "3":
                 break;
             default:
                 System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
+                loginMenu();
         }
 
         scanner.close();
