@@ -15,6 +15,7 @@ public class User {
         return firstName;
     }
 
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -68,6 +69,18 @@ public class User {
     public User(String password, String username) {
         this.password = password;
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", token='" + token + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", emailAdress='" + emailAdress + '\'' +
+                '}';
     }
 
     public User() {

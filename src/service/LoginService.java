@@ -24,14 +24,17 @@ public class LoginService {
     public static void login(String username, String password) {
         boolean userauth=false;
         boolean passwordauth=false;
+        User currentUser=null;
         for (User a:Users.getUserArrayList())
         {
             if (a.getUsername().equals(username))
             {
+
                 userauth=true;
                 if (a.getPassword().equals(password))
                 {
                     passwordauth=true;
+                    currentUser=a;
                 }
             }
         }
@@ -45,6 +48,15 @@ public class LoginService {
         }
         else {
             System.out.println("\u001B[32mLogin successful! \u001B[0mWelcome, " + username + "!");
+            if (currentUser instanceof model.Admin)
+            {
+                MenuService.adminMenu();
+            }
+            else
+            {
+                MenuService.userMenu();
+            }
+
         }
 
 
