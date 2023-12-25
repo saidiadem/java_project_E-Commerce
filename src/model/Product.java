@@ -1,8 +1,24 @@
 package model;
 
+import java.util.Objects;
+
 public abstract class Product {
     private float price;
     private int reference;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
     private int quantity;
     private int userReference;
 

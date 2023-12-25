@@ -39,20 +39,21 @@ public class MenuService {
     public static void adminMenu() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\u001B[33m***********************");
-        System.out.println("* \u001B[36mShoppy! \u001B[33m*");
-        System.out.println("*   \u001B[36mBuy Everything ! \u001B[33m*");
-        System.out.println("***********************\u001B[0m");
-        System.out.println("1. \u001B[32mManage Products\u001B[0m");
-        System.out.println("2. \u001B[34mManage Orders\u001B[0m");
-        System.out.println("3. \u001B[31mLogOut\u001B[0m");
-        //TODO: Add option of adding amounts to products
-        System.out.print("Enter your choice: \n");
 
-        String choice = scanner.nextLine();
         boolean editing = true;
         while (editing)
         {
+            System.out.println("\u001B[33m***********************");
+            System.out.println("* \u001B[36mShoppy! \u001B[33m*");
+            System.out.println("*   \u001B[36mBuy Everything ! \u001B[33m*");
+            System.out.println("***********************\u001B[0m");
+            System.out.println("1. \u001B[32mManage Products\u001B[0m");
+            System.out.println("2. \u001B[34mManage Orders\u001B[0m");
+            System.out.println("3. \u001B[31mLogOut\u001B[0m");
+            //TODO: Add option of adding amounts to products
+            System.out.print("Enter your choice: \n");
+
+            String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
                     ProductService.manageProducts();
@@ -74,22 +75,23 @@ public class MenuService {
     }
 
     public static void userMenu(int token) {
-        //TODO : Add option of editing user details
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\u001B[33m***********************");
-        System.out.println("* \u001B[36mShoppy! \u001B[33m*");
-        System.out.println("*   \u001B[36mBuy Everything ! \u001B[33m*");
-        System.out.println("***********************\u001B[0m");
-        System.out.println("1. \u001B[32mBrowse Products\u001B[0m");
-        System.out.println("2. \u001B[34mManage Cart\u001B[0m");
-        System.out.println("3. \u001B[31mLogOut\u001B[0m");
-        System.out.print("Enter your choice: \n");
-
-        String choice = scanner.nextLine();
         boolean editing =true;
         while (editing)
         {
+            //TODO : Add option of editing user details
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("\u001B[33m***********************");
+            System.out.println("* \u001B[36mShoppy! \u001B[33m*");
+            System.out.println("*   \u001B[36mBuy Everything ! \u001B[33m*");
+            System.out.println("***********************\u001B[0m");
+            System.out.println("1. \u001B[32mBrowse Products\u001B[0m");
+            System.out.println("2. \u001B[34mManage Cart\u001B[0m");
+            System.out.println("3. \u001B[31mLogOut\u001B[0m");
+            System.out.print("Enter your choice: \n");
+
+            String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
                     ProductService.showUserProducts(token);

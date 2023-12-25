@@ -6,6 +6,7 @@ import model.Users;
 import java.util.Scanner;
 
 public class LoginService {
+    //TODO: user with this username already exists
     public static void handleLogin() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\u001B[1m" + MenuService.getFancyBorder());

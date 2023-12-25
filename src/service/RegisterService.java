@@ -29,6 +29,7 @@ public class RegisterService {
     public static boolean register(String newUsername,String newPassword)
     {
         boolean ok=false;
+        boolean cool=true;
         User a= new User(newPassword,newUsername);
         if (!isValidUsername(newUsername))
         {
@@ -37,7 +38,16 @@ public class RegisterService {
             System.out.println("\u001B[31mRegistration failed. \u001B[0m password must be at minimum of 8 characters and at maximum of 30 characters.\n" +
                     "It must also contain at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&). ");
         }
-        else
+        for (User b:Users.getUserArrayList())
+        {
+            if (b.getUsername().equals(newUsername))
+            {
+                System.out.println("\u001B[31mRegistration failed. \u001B[0m User already exists! ");
+                cool=false;
+
+            }
+        }
+        if (cool)
         {
             Users.addUser(a);
             ok=true;
