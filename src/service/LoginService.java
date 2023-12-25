@@ -8,17 +8,13 @@ import java.util.Scanner;
 public class LoginService {
     public static void handleLogin() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("\u001B[1m" + MenuService.getFancyBorder());
         System.out.println("\u001B[1m=== Login ===\u001B[0m");
         System.out.println("\u001B[1m" + MenuService.getFancyBorder());
-
         System.out.print("\u001B[36mEnter Username:\u001B[0m ");
         String username = scanner.nextLine();
-
         System.out.print("\u001B[36mEnter Password:\u001B[0m ");
         String password = scanner.nextLine();
-
         login(username,password);
     }
     public static void login(String username, String password) {
@@ -29,7 +25,6 @@ public class LoginService {
         {
             if (a.getUsername().equals(username))
             {
-
                 userauth=true;
                 if (a.getPassword().equals(password))
                 {
@@ -54,14 +49,10 @@ public class LoginService {
             }
             else
             {
-                MenuService.userMenu();
+                MenuService.userMenu(currentUser.getToken());
             }
 
         }
-
-
-
-
-
     }
+    //TODO logout from admin bug
 }

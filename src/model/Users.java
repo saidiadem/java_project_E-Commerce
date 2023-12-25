@@ -17,6 +17,7 @@ public class Users {
     }
 
     public static void addUser(User a){
+        a.setToken((int)(Math.random()*1000));
         userArrayList.add(a);
     }
     public void displayUsers()

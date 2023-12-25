@@ -1,5 +1,8 @@
 package service;
 
+import model.Cart;
+import model.Products;
+
 import java.util.Scanner;
 
 public class MenuService {
@@ -47,27 +50,31 @@ public class MenuService {
         System.out.print("Enter your choice: \n");
 
         String choice = scanner.nextLine();
-        switch (choice) {
-            case "1":
-                ProductService.manageProducts();
-                adminMenu();
-                break;
-            case "2":
-                adminMenu();
-                break;
-            case "3":
-                System.out.println("\u001B[33mExiting the application. Goodbye!\u001B[0m");
-                break;
-            default:
-                System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
-                adminMenu();
+        boolean editing = true;
+        while (editing)
+        {
+            switch (choice) {
+                case "1":
+                    ProductService.manageProducts();
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    System.out.println("\u001B[33mExiting the application. Goodbye!\u001B[0m");
+                    editing=false;
+                    break;
+                default:
+                    System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
+            }
         }
+
     }
     public static String getFancyBorder() {
         return "\u001B[34m╔══════════════════════╗\u001B[0m";
     }
 
-    public static void userMenu() {
+    public static void userMenu(int token) {
+        //TODO : Add option of editing user details
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\u001B[33m***********************");
@@ -75,25 +82,29 @@ public class MenuService {
         System.out.println("*   \u001B[36mBuy Everything ! \u001B[33m*");
         System.out.println("***********************\u001B[0m");
         System.out.println("1. \u001B[32mBrowse Products\u001B[0m");
-        System.out.println("2. \u001B[34mCheck Cart\u001B[0m");
+        System.out.println("2. \u001B[34mManage Cart\u001B[0m");
         System.out.println("3. \u001B[31mLogOut\u001B[0m");
         System.out.print("Enter your choice: \n");
 
         String choice = scanner.nextLine();
-        switch (choice) {
-            case "1":
-                ProductService.manageProducts();
-                userMenu();
-                break;
-            case "2":
-                userMenu();
-                break;
-            case "3":
-                System.out.println("\u001B[33mExiting the application. Goodbye!\u001B[0m");
-                break;
-            default:
-                System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
-                userMenu();
+        boolean editing =true;
+        while (editing)
+        {
+            switch (choice) {
+                case "1":
+                    ProductService.showUserProducts(token);
+                    break;
+                case "2":
+                    CartService.manageCart(token);
+                    break;
+                case "3":
+                    System.out.println("\u001B[33mExiting the application. Goodbye!\u001B[0m");
+                    editing=false;
+                    break;
+                default:
+                    System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
+            }
         }
+
     }
 }

@@ -1,3 +1,4 @@
+import model.Admin;
 import model.User;
 import model.Users;
 import service.MenuService;
@@ -9,8 +10,10 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        User admin = new User("admin", "admin");
+        Admin admin = new Admin("admin", "admin");
+        User user=new User("user","user");
         Users.addUser(admin);
+        Users.addUser(user);
         MenuService.loginMenu();
 
     }}

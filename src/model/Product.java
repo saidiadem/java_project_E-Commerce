@@ -4,9 +4,27 @@ public abstract class Product {
     private float price;
     private int reference;
     private int quantity;
+    private int userReference;
+
+    public int getUserReference() {
+        return userReference;
+    }
+
+    public void setUserReference(int userReference) {
+        this.userReference = userReference;
+    }
 
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "price=" + price +
+                ", reference=" + reference +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public void setQuantity(int quantity) {

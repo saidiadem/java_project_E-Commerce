@@ -66,6 +66,7 @@ public class Products{
             for (Product i:productArrayList)
             {
                 i.showProduct();
+                System.out.println("***************************");
             }
         }
 

@@ -1,7 +1,8 @@
 package model;
 
 public class User {
-   private String firstName="" , familyName="",token="",password="",username="",emailAdress="";
+   private String firstName="" , familyName="",password="",username="",emailAdress="";
+    private int token=0;
 
     public User(String firstName, String familyName, String password, String username, String emailAdress) {
         this.firstName = firstName;
@@ -28,11 +29,11 @@ public class User {
         this.familyName = familyName;
     }
 
-    public String getToken() {
+    public int getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(int token) {
         this.token = token;
     }
 
@@ -69,6 +70,10 @@ public class User {
     public User(String password, String username) {
         this.password = password;
         this.username = username;
+        for (int i=0;i<10;i++)
+        {
+            token+=((int)(Math.random()*10));
+        }
     }
 
     @Override
