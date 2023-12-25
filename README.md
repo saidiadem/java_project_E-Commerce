@@ -3,3 +3,4 @@ Then the user can log in and browse the products available , potentially adding 
 his own cart totally independant from other users .
 A product is linked to his user by his userReference , it's the user token generated when the user registers.
 JDK 20
+admin username and pass are : admin:admin
