@@ -38,5 +38,27 @@ public class Cart {
         cartArrayList.remove(a);
         nb--;
     }
-    //TODO the cart needs to be different for each yser
+    public static void checkout(int userReference) {
+        Order order = new Order(userReference);
+      ArrayList<Product>  cartUserArrayList=new ArrayList<Product>();
+        for (Product a: cartArrayList)
+        {
+            if (a.getUserReference()==userReference)
+            {
+                cartUserArrayList.add(a);
+            }
+        }
+        order.getProducts().addAll(cartUserArrayList);
+
+        Order.addOrder(order);
+        for (Product a: cartUserArrayList)
+        {
+            if (a.getUserReference()==userReference)
+            {
+                deleteItem(a);
+                nb--;
+            }
+        }
+        System.out.println("\u001B[32mCheckout successful!\u001B[0m");
+    }
 }
