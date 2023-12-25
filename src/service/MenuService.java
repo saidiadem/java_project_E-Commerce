@@ -59,6 +59,7 @@ public class MenuService {
                     ProductService.manageProducts();
                     break;
                 case "2":
+                    OrderService.manageOrders();
                     break;
                 case "3":
                     System.out.println("\u001B[33mExiting the application. Goodbye!\u001B[0m");

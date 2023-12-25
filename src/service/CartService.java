@@ -33,7 +33,7 @@ public class CartService {
                 case "1" -> showProducts(token);
                 case "2" -> removeProduct(token);
                 case "3" -> editAmount(token);
-                case "4" -> payCart(token);
+                case "4" -> processOrder(token);
                 case "5" -> {
                     System.out.println("\u001B[33mReturning to the main menu.\u001B[0m");
                     editing = false;
@@ -43,8 +43,31 @@ public class CartService {
         }
 
     }
+// payCart will pay the cart
+    private static void processOrder(int token) {
+        Scanner scanner=new Scanner(System.in);
+        boolean editing=true;
+        while (editing)
+        {
+            System.out.println("\u001B[33m***************************");
+            System.out.println("* \u001B[36mOrder Processing\u001B[33m*");
+            System.out.println("***************************\u001B[0m");
+            System.out.println("1. \u001B[32mPay with card\u001B[0m");
+            System.out.println("2. \u001B[35mPay with cash\u001B[0m");
+            System.out.println("3. \u001B[33mBack to Cart Menu\u001B[0m");
+            System.out.print("Enter your choice: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1" -> Cart.checkout(token);
+                case "3" -> {
+                    System.out.println("\u001B[33mReturning to the cart menu.\u001B[0m");
+                    editing = false;
+                }
+                default -> System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
+            }
+        }
 
-    private static void payCart(int token) {
+
     }
 
     public static void showProducts(int token) {

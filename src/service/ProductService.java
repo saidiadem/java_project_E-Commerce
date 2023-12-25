@@ -237,27 +237,40 @@ public class ProductService {
                 System.out.println(i++);
                 System.out.println(a.toString());
             }
-            System.out.println("Enter the name of the product you want to add to your cart");
+            //does the user want to add a product to his cart or not ?
+            System.out.println("Do you want to add a product to your cart ? (y/n)");
             Scanner scanner=new Scanner(System.in);
-            String name=scanner.nextLine();
-            Product a=searchProduct(name);
-            if (a==null)
+            String choice=scanner.nextLine();
+            if (Objects.equals(choice, "y"))
             {
-                System.out.println("Product not found");
+                System.out.println("Enter the name of the product you want to add to your cart");
+                String name=scanner.nextLine();
+                Product a=searchProduct(name);
+                if (a==null)
+                {
+                    System.out.println("Product not found");
+                }
+                else
+                {
+                    System.out.println("Enter the quantity of the product you want to add to your cart");
+                    int quantity=scanner.nextInt();
+                    a.setQuantity(quantity);
+                    a.setUserReference(token);
+                    Cart.addProductToCart(a);
+                    System.out.println("Product added to cart successfully");
+                    editing=false;
+                }
             }
+
+
             else
             {
-                System.out.println("Enter the quantity of the product you want to add to your cart");
-                int quantity=scanner.nextInt();
-                a.setQuantity(quantity);
-                a.setUserReference(token);
-                Cart.addProductToCart(a);
-                System.out.println("Product added to cart successfully");
                 editing=false;
             }
         }
 
     }
+    //TODO: let the user out of the product adding menu
 }
 
 
