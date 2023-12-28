@@ -52,6 +52,21 @@ public class CartService {
             System.out.println("\u001B[33m***************************");
             System.out.println("* \u001B[36mOrder Processing\u001B[33m*");
             System.out.println("***************************\u001B[0m");
+            ArrayList<Product> cart =new ArrayList<Product>();
+            for (Product a: Cart.getCartArrayList())
+            {
+                if (a.getUserReference()==token)
+                {
+                    cart.add(a);
+                }
+            }
+            if (cart.isEmpty())
+            {
+                System.out.println("\u001B[31mThere are no products in the cart!\u001B[0m");
+                System.out.println("\nPress Enter to continue...");
+                scanner.nextLine();
+                return;
+            }
             System.out.println("1. \u001B[32mPay with card\u001B[0m");
             System.out.println("2. \u001B[33mBack to Cart Menu\u001B[0m");
             System.out.print("Enter your choice: ");
@@ -160,8 +175,24 @@ public class CartService {
             if ((a.getName().equals(name))&&(a.getUserReference()==token))
             {
                 System.out.print("Enter the new amount: \n");
-                int amount = scanner.nextInt();
-                a.setQuantity(amount);
+                String amount = scanner.nextLine();
+                int amountValue;
+                try {
+                    amountValue = Integer.parseInt(amount);
+                } catch (NumberFormatException e) {
+                    System.out.println("\u001B[31mInvalid amount!\u001B[0m");
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                    return;
+                }
+                if (amountValue<0)
+                {
+                    System.out.println("\u001B[31mInvalid amount!\u001B[0m");
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                    return;
+                }
+                a.setQuantity(amountValue);
                 System.out.println("\u001B[32mAmount edited successfully!\u001B[0m");
                 System.out.println("\nPress Enter to continue...");
                 scanner.nextLine();

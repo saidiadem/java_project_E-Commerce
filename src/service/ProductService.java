@@ -27,48 +27,55 @@ public class ProductService {
             System.out.println("7. \u001B[33mBack to Main Menu\u001B[0m");
             System.out.println("Select Your Product Category!");
             String productCategory=scanner.nextLine();
-
-            System.out.print("Enter product name: ");
-            String name = scanner.nextLine();
-
-            System.out.print("Enter product price: ");
-            String price = scanner.nextLine();
-            System.out.println("How many do we have in stock: ");
-            String quantity=scanner.nextLine();
+            String name="";
+            String price="";
+            String quantity="";
             int quantity2=0;
-            try {
-                quantity2=Integer.parseInt(quantity);
-            } catch (NumberFormatException e) {
-                System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
-                ok=false;
-            }
-            if (quantity2<0)
-            {
-                System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
-                ok=false;
-            }
-            //checks if price can be parsed for float or not
             float price2=0;
-            try {
-                price2 = Float.parseFloat(price);
-            } catch (NumberFormatException e) {
-                System.out.println("\u001B[31mInvalid price. Please try again.\u001B[0m");
-                ok=false;
-            }
-            if (price2<0)
+            if (!Objects.equals(productCategory, "7"))
             {
-                System.out.println("\u001B[31mInvalid price. Please try again.\u001B[0m");
-                ok=false;
-            }
-            for (Product a:Products.getProductArrayList())
-            {
-                if (a.getName().equals(name))
+                System.out.print("Enter product name: ");
+                 name = scanner.nextLine();
+
+                System.out.print("Enter product price: ");
+                 price = scanner.nextLine();
+                System.out.println("How many do we have in stock: ");
+                 quantity=scanner.nextLine();
+                try {
+                    quantity2=Integer.parseInt(quantity);
+                } catch (NumberFormatException e) {
+                    System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
+                    ok=false;
+                }
+                if (quantity2<0)
                 {
-                    a.setQuantity(a.getQuantity()+quantity2);
-                    System.out.println("\u001B[32mProduct already exists , amount added successfully!\u001B[0m");
-                    return;
+                    System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
+                    ok=false;
+                }
+                //checks if price can be parsed for float or not
+                try {
+                    price2 = Float.parseFloat(price);
+                } catch (NumberFormatException e) {
+                    System.out.println("\u001B[31mInvalid price. Please try again.\u001B[0m");
+                    ok=false;
+                }
+                if (price2<0)
+                {
+                    System.out.println("\u001B[31mInvalid price. Please try again.\u001B[0m");
+                    ok=false;
+                }
+                for (Product a:Products.getProductArrayList())
+                {
+                    if (a.getName().equals(name))
+                    {
+                        a.setQuantity(a.getQuantity()+quantity2);
+                        System.out.println("\u001B[32mProduct already exists , amount added successfully!\u001B[0m");
+                        return;
+                    }
                 }
             }
+
+
            if(ok)
            {
                switch (productCategory) {
@@ -229,6 +236,11 @@ public class ProductService {
                         System.out.println("\u001B[31mInvalid price. Please try again.\u001B[0m");
                         return;
                     }
+                    if (price2<0)
+                    {
+                        System.out.println("\u001B[31mInvalid price. Please try again.\u001B[0m");
+                        return;
+                    }
                 }
                 //does the user want to update the name or not ?
                 System.out.println("Do you want to update the name of the product ? (y/n)");
@@ -250,6 +262,11 @@ public class ProductService {
                     try {
                         quantity2 = Integer.parseInt(quantity);
                     } catch (NumberFormatException e) {
+                        System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
+                        return;
+                    }
+                    if (quantity2<0)
+                    {
                         System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
                         return;
                     }
@@ -286,7 +303,7 @@ public class ProductService {
             System.out.println("1. Search for a product by price range");
             System.out.println("2. Filter products by category");
             System.out.println("3. Show all products");
-            System.out.println("4.Search for products by name");
+            System.out.println("4. Search for products by name");
             System.out.println("5. Exit");
 
             System.out.println("Enter your choice:");
@@ -374,16 +391,23 @@ public class ProductService {
                 }
                 else
                 {
-                    System.out.println("Feedback on this product:");
-                    for (String i:a.getFeedback())
+                    if (a.getFeedback().isEmpty())
                     {
-                        System.out.println(i);
+                        System.out.println("No feedback on this product yet");
                     }
+                    else {
+                        System.out.println("Feedback on this product:");
+                        for (String i:a.getFeedback())
+                        {
+                            System.out.println(i);
+                        }
+                    }
+
                 }
             }
             //does the user want to add a product to his cart or not ?
             System.out.println("Do you want to add a product to your cart ? (y/n)");
-             choice=scanner.nextLine();
+            choice=scanner.nextLine();
             if (Objects.equals(choice, "y"))
             {
                 System.out.println("Enter the name of the product you want to add to your cart");
@@ -396,13 +420,25 @@ public class ProductService {
                 else
                 {
                     System.out.println("Enter the quantity of the product you want to add to your cart");
-                    int quantity=scanner.nextInt();
-                    if (quantity>a.getQuantity())
+                    String quantity=scanner.nextLine();
+                    int quantityValue=0;
+                    try {
+                        quantityValue = Integer.parseInt(quantity);
+                    } catch (NumberFormatException e) {
+                        System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
+                        return;
+                    }
+                    if (quantityValue>a.getQuantity())
                     {
                         System.out.println("Not enough products in stock");
                         return;
                     }
-                    a.setQuantity(quantity);
+                    if (quantityValue<0)
+                    {
+                        System.out.println("\u001B[31mInvalid quantity. Please try again.\u001B[0m");
+                        return;
+                    }
+                    a.setQuantity(quantityValue);
                     a.setUserReference(token);
                     Cart.addProductToCart(a);
                     System.out.println("Product added to cart successfully");

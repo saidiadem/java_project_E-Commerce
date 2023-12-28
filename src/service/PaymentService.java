@@ -18,7 +18,7 @@ public class PaymentService {
         System.out.println("Enter expiration date (MM/YY):");
         String expirationDate = scanner.nextLine();
 
-        System.out.println("Enter validation code (CVV):");
+        System.out.println("Enter validation code (CVV)(3 numbers):");
         String validationCode = scanner.nextLine();
 
         if (isValidCreditCardNumber(creditCardNumber)
@@ -167,7 +167,7 @@ public class PaymentService {
 
     private static boolean isValidExpirationDate(String expirationDate) {
         // Simple validation for MM/YY format (you may need more checks)
-        return expirationDate.matches("(0[1-9]|1[0-2])/\\d{2}");
+        return expirationDate.matches("(0[1-9]|1[0-2])/\\d{2}")||expirationDate.matches("(0[1-9]|1[0-2])/\\d{4}");
     }
 
     private static boolean isValidValidationCode(String validationCode) {

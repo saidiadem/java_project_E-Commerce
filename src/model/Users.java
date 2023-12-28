@@ -20,7 +20,7 @@ public class Users {
         a.setToken((int)(Math.random()*1000));
         userArrayList.add(a);
     }
-    public void displayUsers()
+    public static void displayUsers()
     {
         for (User i:userArrayList)
         {
