@@ -53,13 +53,12 @@ public class CartService {
             System.out.println("* \u001B[36mOrder Processing\u001B[33m*");
             System.out.println("***************************\u001B[0m");
             System.out.println("1. \u001B[32mPay with card\u001B[0m");
-            System.out.println("2. \u001B[35mPay with cash\u001B[0m");
-            System.out.println("3. \u001B[33mBack to Cart Menu\u001B[0m");
+            System.out.println("2. \u001B[33mBack to Cart Menu\u001B[0m");
             System.out.print("Enter your choice: ");
             String choice = scanner.nextLine();
             switch (choice) {
-                case "1" -> Cart.checkout(token);
-                case "3" -> {
+                case "1" -> PaymentService.pay(token);
+                case "2" -> {
                     System.out.println("\u001B[33mReturning to the cart menu.\u001B[0m");
                     editing = false;
                 }
@@ -103,6 +102,13 @@ public class CartService {
         System.out.println("\u001B[33m***************************");
         System.out.println("* \u001B[36mRemove Product Menu \u001B[33m*");
         System.out.println("***************************\u001B[0m");
+        if (Cart.getCartArrayList().isEmpty())
+        {
+            System.out.println("\u001B[31mThere are no products in the cart!\u001B[0m");
+            System.out.println("\nPress Enter to continue...");
+            scanner.nextLine();
+            return;
+        }
         System.out.print("Enter the name of the product you want to remove: \n");
         String name = scanner.nextLine();
         boolean ok =true;
@@ -139,6 +145,13 @@ public class CartService {
         System.out.println("\u001B[33m***************************");
         System.out.println("* \u001B[36mEdit Amount Menu \u001B[33m*");
         System.out.println("***************************\u001B[0m");
+        if (Cart.getCartArrayList().isEmpty())
+        {
+            System.out.println("\u001B[31mThere are no products in the cart!\u001B[0m");
+            System.out.println("\nPress Enter to continue...");
+            scanner.nextLine();
+            return;
+        }
         System.out.print("Enter the name of the product you want to edit: \n");
         String name = scanner.nextLine();
         boolean ok = true;

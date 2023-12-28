@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Cart {
     private static ArrayList<Product> cartArrayList=new ArrayList<Product>();
@@ -9,11 +10,9 @@ public class Cart {
     public static ArrayList<Product> getCartArrayList() {
         return cartArrayList;
     }
-
     public static int getNb() {
         return nb;
     }
-
     public static void addProductToCart(Product a)
     {
         boolean ok=true;
@@ -55,6 +54,13 @@ public class Cart {
         {
             if (a.getUserReference()==userReference)
             {
+                for (Product i:Products.getProductArrayList())
+                {
+                    if (Objects.equals(i.getName(), a.getName()))
+                    {
+                        i.setQuantity(i.getQuantity()-a.getQuantity());
+                    }
+                }
                 deleteItem(a);
                 nb--;
             }
