@@ -47,10 +47,11 @@ public class MenuService {
             System.out.println("* \u001B[36mShoppy! \u001B[33m*");
             System.out.println("*   \u001B[36mBuy Everything ! \u001B[33m*");
             System.out.println("***********************\u001B[0m");
-            System.out.println("1. \u001B[32mManage Products\u001B[0m");
+            System.out.println("1. \u001B[32mManage Inventory\u001B[0m");
             System.out.println("2. \u001B[34mManage Orders\u001B[0m");
             System.out.println("3. \u001B[31mLogOut\u001B[0m");
             //TODO: Add option of adding amounts to products
+            //TODO: -4 bakou 7lib
             System.out.print("Enter your choice: \n");
 
             String choice = scanner.nextLine();

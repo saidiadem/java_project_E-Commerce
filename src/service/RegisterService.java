@@ -34,9 +34,11 @@ public class RegisterService {
         if (!isValidUsername(newUsername))
         {
             System.out.println("\u001B[31mRegistration failed. \u001B[0m Username must be between 3 and 20 characters! ");
+            return false;
         } else if (!isValidPassword(newPassword)) {
             System.out.println("\u001B[31mRegistration failed. \u001B[0m password must be at minimum of 8 characters and at maximum of 30 characters.\n" +
                     "It must also contain at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&). ");
+            return false;
         }
         for (User b:Users.getUserArrayList())
         {
