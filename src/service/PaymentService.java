@@ -11,7 +11,21 @@ public class PaymentService {
     while (editing)
     {
         Scanner scanner = new Scanner(System.in);
-
+        System.out.println("\u001B[33m***************************");
+        System.out.println("* \u001B[36mPayment Menu \u001B[33m*");
+        System.out.println("***************************\u001B[0m");
+        //does the user want to apply a coupon ?
+        System.out.println("do you want to apply a coupon ? (y/n)");
+        String choice = scanner.nextLine();
+        switch (choice) {
+            case "y" -> {
+                CouponService.couponMenu(token);
+            }
+            case "n" -> {
+                System.out.println("Okay. Continuing to the payment menu.");
+            }
+            default -> System.out.println("Invalid choice. Please try again.");
+        }
         System.out.println("Enter credit card number:");
         String creditCardNumber = scanner.nextLine();
 
@@ -32,7 +46,7 @@ public class PaymentService {
             while (isRating)
             {
                 System.out.println("do you want to rate the products you purchased? (y/n)");
-                String choice = scanner.nextLine();
+                 choice = scanner.nextLine();
                 switch (choice) {
                     case "y" -> {
                         boolean validRating=true;
@@ -68,7 +82,7 @@ public class PaymentService {
             while (isGivingFeedback)
             {
                 System.out.println("do you want to give us feedback? (y/n)");
-                String choice = scanner.nextLine();
+                 choice = scanner.nextLine();
 
                 switch (choice) {
                     case "y" -> {
@@ -91,7 +105,7 @@ public class PaymentService {
         } else {
             System.out.println("Credit card details are invalid.");
             System.out.println("do you want to try again? (y/n)");
-            String choice = scanner.nextLine();
+             choice = scanner.nextLine();
             switch (choice) {
                 case "y" -> {
                     System.out.println("Please enter your credit card details again.");
@@ -175,5 +189,6 @@ public class PaymentService {
         return validationCode.matches("\\d{3}");
     }
 
-    
+
+
 }

@@ -67,4 +67,16 @@ public class Cart {
         }
         System.out.println("\u001B[32mCheckout successful!\u001B[0m");
     }
+
+    public static String getTotalAmount(int token) {
+        double total=0;
+        for (Product a: cartArrayList)
+        {
+            if (a.getUserReference()==token)
+            {
+                total+=a.getPrice()*a.getQuantity();
+            }
+        }
+        return String.valueOf(total);
+    }
 }

@@ -283,7 +283,31 @@ public class ProductService {
         {
             if (a.getName().equals(name))
             {
-                return a;
+                if (a instanceof ElectronicProduct)
+                {
+                    return new ElectronicProduct(a.getPrice(),a.getName(),a.getQuantity());
+                }
+                if (a instanceof EntertainmentProduct)
+                {
+                    return new EntertainmentProduct(a.getPrice(),a.getName(),a.getQuantity());
+                }
+                if (a instanceof FashionProduct)
+                {
+                    return new FashionProduct(a.getPrice(),a.getName(),a.getQuantity());
+                }
+                if (a instanceof HealthProduct)
+                {
+                    return new HealthProduct(a.getPrice(),a.getName(),a.getQuantity());
+                }
+                if (a instanceof HomeProduct)
+                {
+                    return new HomeProduct(a.getPrice(),a.getName(),a.getQuantity());
+                }
+                if (a instanceof OtherProduct)
+                {
+                    return new OtherProduct(a.getPrice(),a.getName(),a.getQuantity());
+                }
+
             }
         }
         return null;
@@ -384,26 +408,31 @@ public class ProductService {
             {
                 System.out.println("Enter the name of the product you want to view feedback on");
                 String name=scanner.nextLine();
-                Product a=searchProduct(name);
-                if (a==null)
+                for (Product a:Products.getProductArrayList())
                 {
-                    System.out.println("Product not found");
-                }
-                else
-                {
-                    if (a.getFeedback().isEmpty())
+                    if (a==null)
                     {
-                        System.out.println("No feedback on this product yet");
+                        System.out.println("Product not found");
                     }
-                    else {
-                        System.out.println("Feedback on this product:");
-                        for (String i:a.getFeedback())
+                    else
+                    if (a.getName().equals(name))
+                    {
+                        if (a.getFeedback().isEmpty())
                         {
-                            System.out.println(i);
+                            System.out.println("No feedback on this product yet");
+                        }
+                        else {
+                            System.out.println("Feedback on this product:");
+                            for (String i:a.getFeedback())
+                            {
+                                System.out.println(i);
+                            }
                         }
                     }
-
                 }
+                Product a=searchProduct(name);
+
+
             }
             //does the user want to add a product to his cart or not ?
             System.out.println("Do you want to add a product to your cart ? (y/n)");

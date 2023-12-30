@@ -72,7 +72,11 @@ public class CartService {
             System.out.print("Enter your choice: ");
             String choice = scanner.nextLine();
             switch (choice) {
-                case "1" -> PaymentService.pay(token);
+                case "1" -> {
+                    PaymentService.pay(token);
+                    editing = false;
+                }
+
                 case "2" -> {
                     System.out.println("\u001B[33mReturning to the cart menu.\u001B[0m");
                     editing = false;
@@ -108,8 +112,10 @@ public class CartService {
                 System.out.println("***************************");
             }
         }
-
-
+        System.out.println("Total Amount: "+Cart.getTotalAmount(token));
+        System.out.println("\nPress Enter to continue...");
+        Scanner scanner=new Scanner(System.in);
+        scanner.nextLine();
     }
     // removeProduct will remove a product from the cart
     public static void removeProduct(int token) {
