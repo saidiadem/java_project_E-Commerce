@@ -4,8 +4,8 @@ his own cart totally independant from other users .
 A product is linked to his user by his userReference , it's the user token generated when the user registers.
 JDK 20
 admin username and pass are : admin:admin
-Shopify Java Application
-Overview
+##Shopify Java Application
+###Overview
 Welcome to Shopify, a Java-based e-commerce application . Shopify offers a comprehensive platform catering to both administrators and users, facilitating seamless product management, order processing, and more.
 
 Testing Credentials and Information
