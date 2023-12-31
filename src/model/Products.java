@@ -35,6 +35,21 @@ public class Products{
         productArrayList.remove(a);
         nb--;
     }
+// this one is used for the paymentService , if it finds the product it returns its quantity , if not it returns Integer.MAX_VALUE( means the product is no longer in the products so it no longer exists so it should be deleted)
+    public static int find(String name) {
+        boolean ok=true;
+        for (Product i:productArrayList)
+        {
+            if (i.getName().equals(name))
+            {
+                ok=false;
+                return i.getQuantity();
+            }
+        }
+
+        return Integer.MAX_VALUE;
+
+    }
 
     public void setProductArrayList(ArrayList<Product> productArrayList) {
         this.productArrayList = productArrayList;

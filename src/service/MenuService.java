@@ -11,30 +11,36 @@ public class MenuService {
     public static void loginMenu() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\u001B[1m" + getFancyBorder());
-        System.out.println("\u001B[1m===Menu===\u001B[0m");
-        System.out.println("\u001B[1m" + getFancyBorder());
 
-        System.out.println("\u001B[36m1. Login\u001B[0m");
-        System.out.println("\u001B[36m2. Register\u001B[0m");
-        System.out.println("\u001B[36m3. Quit\u001B[0m");
-        System.out.print("Select option: ");
-        String choice = scanner.nextLine();
-        switch (choice) {
-            case "1":
-                LoginService.handleLogin();
-                loginMenu();
-                break;
-            case "2":
-                RegisterService.handleRegister();
-                loginMenu();
-                break;
-            case "3":
-                break;
-            default:
-                System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
-                loginMenu();
+        boolean editing=true;
+        while (editing)
+        {
+            System.out.println("\u001B[1m" + getFancyBorder());
+            System.out.println("\u001B[1m===Menu===\u001B[0m");
+            System.out.println("\u001B[1m" + getFancyBorder());
+
+            System.out.println("\u001B[36m1. Login\u001B[0m");
+            System.out.println("\u001B[36m2. Register\u001B[0m");
+            System.out.println("\u001B[36m3. Quit\u001B[0m");
+            System.out.print("Select option: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    LoginService.handleLogin();
+                    break;
+                case "2":
+                    RegisterService.handleRegister();
+                    break;
+                case "3":
+                    System.out.println("\u001B[33mExiting the application. Goodbye!\u001B[0m");
+                    editing=false;
+                    break;
+                default:
+                    System.out.println("\u001B[31mInvalid choice. Please try again.\u001B[0m");
+                    break;
+            }
         }
+
 
         scanner.close();
     }
@@ -77,12 +83,11 @@ public class MenuService {
         return "\u001B[34m╔══════════════════════╗\u001B[0m";
     }
 
-    public static void userMenu(int token) {
+    public static void userMenu(User currentUser) {
 
         boolean editing =true;
         while (editing)
         {
-            //TODO : Add option of editing user details
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("\u001B[33m***********************");
@@ -97,10 +102,10 @@ public class MenuService {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                    ProductService.showUserProducts(token);
+                    ProductService.showUserProducts(currentUser);
                     break;
                 case "2":
-                    CartService.manageCart(token);
+                    CartService.manageCart(currentUser);
                     break;
                 case "3":
                     System.out.println("\u001B[33mExiting the application. Goodbye!\u001B[0m");

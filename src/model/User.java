@@ -1,8 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+
 public class User {
    private String firstName="" , familyName="",password="",username="",emailAdress="";
     private int token=0;
+    private Cart userCart=new Cart();
+
+    public Cart getUserCart() {
+        return userCart;
+    }
+
+    public void setUserCart(Cart userCart) {
+        this.userCart = userCart;
+    }
 
     public User(String firstName, String familyName, String password, String username, String emailAdress) {
         this.firstName = firstName;

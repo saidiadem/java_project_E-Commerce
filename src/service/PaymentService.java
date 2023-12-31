@@ -1,12 +1,16 @@
 package service;
 
 import model.Cart;
+import model.Product;
+import model.Products;
+import model.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PaymentService {
     // menu for asking for credit card details and checkout
-    public static void pay(int token) {
+    public static void payWithCard(User currentUser) {
         boolean editing=true;
     while (editing)
     {
@@ -15,11 +19,30 @@ public class PaymentService {
         System.out.println("* \u001B[36mPayment Menu \u001B[33m*");
         System.out.println("***************************\u001B[0m");
         //does the user want to apply a coupon ?
+        // check if the quantity of the products in the cart are more than in the inventory
+        ArrayList<Product>userCart=new ArrayList<Product>();
+        for (model.Product a:currentUser.getUserCart().getCartArrayList())
+        {
+
+                userCart.add(a);
+
+        }
+        for(model.Product a:userCart)
+        {
+            if (a.getQuantity()> Products.find(a.getName()))
+            {
+                System.out.println("The quantity of "+a.getName()+" in your cart is more than the quantity in the inventory. Please remove it from your cart.");
+                editing=false;
+                return;
+            }
+        }
+
+
         System.out.println("do you want to apply a coupon ? (y/n)");
         String choice = scanner.nextLine();
         switch (choice) {
             case "y" -> {
-                CouponService.couponMenu(token);
+                CouponService.couponMenu(currentUser);
             }
             case "n" -> {
                 System.out.println("Okay. Continuing to the payment menu.");
@@ -52,7 +75,7 @@ public class PaymentService {
                         boolean validRating=true;
                         System.out.println("Please enter the name of the product you want to rate.");
                         String name = scanner.nextLine();
-                        System.out.println("Please enter your rating for this product.");
+                        System.out.println("Please enter your rating for this product(/5).");
                         double ratingValue = 0;
                         String rating = scanner.nextLine();
                         try {
@@ -67,7 +90,7 @@ public class PaymentService {
                         }
                         if (validRating)
                         {
-                            PaymentService.rateProduct(token, name, ratingValue);
+                            PaymentService.rateProduct(currentUser, name, ratingValue);
                             isRating=false;
                         }
 
@@ -90,7 +113,7 @@ public class PaymentService {
                         String name = scanner.nextLine();
                         System.out.println("Please enter your feedback.");
                         String feedback = scanner.nextLine();
-                        addFeedback(feedback,name,token);
+                        addFeedback(feedback,name,currentUser);
                         isGivingFeedback=false;
                     }
                     case "n" -> {System.out.println("Okay. Returning to the cart menu.");
@@ -99,8 +122,8 @@ public class PaymentService {
                     default -> System.out.println("Invalid choice. Please try again.");
                 }
             }
-
-            Cart.checkout(token);
+            Cart currentUserUserCart= currentUser.getUserCart();
+            currentUserUserCart.checkout(currentUser);
             editing=false;
         } else {
             System.out.println("Credit card details are invalid.");
@@ -121,11 +144,11 @@ public class PaymentService {
     }
 }
 
-    private static void addFeedback(String feedback,String name,int token) {
+    private static void addFeedback(String feedback,String name,User currentUser) {
         boolean ok=false;
-        for (model.Product a:Cart.getCartArrayList())
+        for (model.Product a:currentUser.getUserCart().getCartArrayList())
         {
-            if ((a.getName().equals(name))&& (a.getUserReference()==token))
+            if ((a.getName().equals(name)))
             {
                 ok=true;
             }
@@ -147,11 +170,11 @@ public class PaymentService {
         }
     }
 
-    private static void rateProduct(int token, String name, double rating) {
+    private static void rateProduct(User currentUser, String name, double rating) {
         boolean ok=false;
-        for (model.Product a:Cart.getCartArrayList())
+        for (model.Product a:currentUser.getUserCart().getCartArrayList())
         {
-            if ((a.getName().equals(name)) && (a.getUserReference() == token)) {
+            if ((a.getName().equals(name))) {
                 ok = true;
                 break;
             }

@@ -314,7 +314,7 @@ public class ProductService {
     }
     //show products when browsing by the user
 
-    public static void showUserProducts(int token) {
+    public static void showUserProducts(User currentUser) {
         boolean editing=true;
         while (editing)
         {
@@ -468,8 +468,7 @@ public class ProductService {
                         return;
                     }
                     a.setQuantity(quantityValue);
-                    a.setUserReference(token);
-                    Cart.addProductToCart(a);
+                    currentUser.getUserCart().addProductToCart(a);
                     System.out.println("Product added to cart successfully");
                     editing=false;
                 }

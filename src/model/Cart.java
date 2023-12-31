@@ -4,21 +4,26 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Cart {
-    private static ArrayList<Product> cartArrayList=new ArrayList<Product>();
-    private static int nb=0;
+    private  ArrayList<Product> cartArrayList=new ArrayList<Product>();
+    private  int nb=0;
+    private double totalAmount=0;
 
-    public static ArrayList<Product> getCartArrayList() {
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public  ArrayList<Product> getCartArrayList() {
         return cartArrayList;
     }
-    public static int getNb() {
+    public  int getNb() {
         return nb;
     }
-    public static void addProductToCart(Product a)
+    public  void addProductToCart(Product a)
     {
         boolean ok=true;
         for (Product i:cartArrayList)
         {
-            if (i.getReference()==a.getReference())
+            if ((i.getName()==a.getName()))
             {
                 i.setQuantity(i.getQuantity()+a.getQuantity());
                 ok=false;
@@ -33,27 +38,25 @@ public class Cart {
 
     }
 
-    public static void deleteItem(Product a) {
+    public  void deleteItem(Product a) {
         cartArrayList.remove(a);
         nb--;
     }
-    public static void checkout(int userReference) {
-        Order order = new Order(userReference);
+    public  void checkout(User currentUser) {
+        Order order = new Order(currentUser);
       ArrayList<Product>  cartUserArrayList=new ArrayList<Product>();
         for (Product a: cartArrayList)
         {
-            if (a.getUserReference()==userReference)
-            {
+
                 cartUserArrayList.add(a);
-            }
+
         }
         order.getProducts().addAll(cartUserArrayList);
 
         Order.addOrder(order);
         for (Product a: cartUserArrayList)
         {
-            if (a.getUserReference()==userReference)
-            {
+
                 for (Product i:Products.getProductArrayList())
                 {
                     if (Objects.equals(i.getName(), a.getName()))
@@ -63,20 +66,21 @@ public class Cart {
                 }
                 deleteItem(a);
                 nb--;
-            }
+
         }
         System.out.println("\u001B[32mCheckout successful!\u001B[0m");
     }
 
-    public static String getTotalAmount(int token) {
+    public  String getTotalAmount() {
         double total=0;
         for (Product a: cartArrayList)
         {
-            if (a.getUserReference()==token)
-            {
+
                 total+=a.getPrice()*a.getQuantity();
-            }
+
         }
         return String.valueOf(total);
     }
+
+
 }

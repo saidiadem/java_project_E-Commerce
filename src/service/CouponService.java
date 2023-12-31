@@ -2,6 +2,7 @@ package service;
 
 import model.Cart;
 import model.Coupon;
+import model.User;
 
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import static model.Coupon.addCoupon;
 
 public class CouponService {
 
-    public static void couponMenu(int token) {
+    public static void couponMenu(User currentUser) {
         boolean editing = true;
         while (editing) {
             Scanner scanner = new Scanner(System.in);
@@ -27,7 +28,7 @@ public class CouponService {
                     if (isValidCouponCode(couponCode)) {
                         System.out.println("Coupon code is valid.");
                         System.out.println("Coupon code applied successfully.");
-                        System.out.println("new price "+CouponService.applyCoupon(token,couponCode));
+                        System.out.println("new price "+CouponService.applyCoupon(currentUser,couponCode));
                         editing = false;
                     } else {
                         System.out.println("Coupon code is invalid. Please try again.");
@@ -79,20 +80,20 @@ public class CouponService {
     private static boolean isValidCouponCode(String couponCode) {
         return couponCode.matches("[A-Z]{4}[0-9]{4}");
     }
-    public static String applyCoupon(int token, String couponCode) {
+    public static String applyCoupon(User currentUser, String couponCode) {
         double total=0;
-        for (model.Product a: Cart.getCartArrayList())
+        for (model.Product a: currentUser.getUserCart().getCartArrayList())
         {
-            if (a.getUserReference()==token)
-            {
+
                 total+=a.getPrice()*a.getQuantity();
-            }
+
         }
         for (model.Coupon a:model.Coupon.getCoupons())
         {
             if (a.getCode().equals(couponCode))
             {
                 total=total-total*(a.getDiscount()/100);
+                currentUser.getUserCart().setTotalAmount(total);
             }
         }
         return String.valueOf(total);

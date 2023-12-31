@@ -42,14 +42,14 @@ public class LoginService {
             System.out.println("\u001B[31mLogin failed. \u001B[0mPlease check your password ");
         }
         else {
-            System.out.println("\u001B[32mLogin successful! \u001B[0mWelcome, " + username + "!");
+            System.out.println("\u001B[32mLogin successful! \u001B[0mWelcome, " + username + "!"+currentUser.getToken());
             if (currentUser instanceof model.Admin)
             {
                 MenuService.adminMenu();
             }
             else
             {
-                MenuService.userMenu(currentUser.getToken());
+                MenuService.userMenu(currentUser);
             }
 
         }

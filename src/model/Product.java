@@ -8,7 +8,8 @@ public abstract class Product {
     private float price;
     private int reference;
     private double rating;
-    private int nbReviews=0;
+    private int nbReviews=1;
+
     private ArrayList<String> feedback=new ArrayList<>();
 
     public ArrayList<String> getFeedback() {
@@ -53,15 +54,6 @@ public abstract class Product {
     }
 
     private int quantity;
-    private int userReference;
-
-    public int getUserReference() {
-        return userReference;
-    }
-
-    public void setUserReference(int userReference) {
-        this.userReference = userReference;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -111,6 +103,7 @@ public abstract class Product {
         this.name = name;
         this.reference=Products.getNb();
         this.quantity=quantity;
+        this.rating=2.5;
     }
 
     public Product() {

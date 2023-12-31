@@ -22,6 +22,5 @@ public class Main {
         Users.addUser(admin);
         Users.addUser(user);
         MenuService.loginMenu();
-
     }}
 

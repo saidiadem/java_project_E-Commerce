@@ -12,6 +12,16 @@ public class Users {
 
     }
 
+    public static User getUser(int token) {
+        for (User i:userArrayList)
+        {
+            if (i.getToken()==token)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
     public static ArrayList<User> getUserArrayList() {
         return userArrayList;
     }
