@@ -147,7 +147,7 @@ public class ProductService {
             System.out.println("***************************\u001B[0m");
             System.out.println("1. \u001B[32mView Inventory \u001B[0m");
             System.out.println("2. \u001B[32mAdd  a Product to the Inventory \u001B[0m");
-            System.out.println("3. \u001B[32mEdit Amount of a Product in Inventory \u001B[0m");
+            System.out.println("3. \u001B[32mEdit a Product in Inventory \u001B[0m");
             System.out.println("4. \u001B[32mRemove Product from Inventory \u001B[0m");
             System.out.println("5. \u001B[33mBack to Main Menu\u001B[0m");
             System.out.print("Enter your choice: ");
@@ -250,6 +250,14 @@ public class ProductService {
                 {
                     System.out.print("Enter the new name of the product:");
                     newName=scanner.nextLine();
+                    for (Product b:Products.getProductArrayList())
+                    {
+                        if (b.getName().equals(newName))
+                        {
+                            System.out.println("Product with this name already exists");
+                            return;
+                        }
+                    }
                 }
                 //does the user want to update the quantity or not ?
                 System.out.println("Do you want to update the quantity of the product ? (y/n)");

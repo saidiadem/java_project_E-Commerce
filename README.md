@@ -74,7 +74,7 @@ Username: user
 Password: user
 
 
-Some products are added automatically to ease the testing process, if you want the virgin application you can simply comment out the code in the main function (except the last line that starts up the menu)
+Some products are added automatically to ease the testing process, if you want the virgin application you can simply comment out the code in the main function (except the three last lines that start up the menu and define the admin )
 
 
 ### Payment Information 

@@ -110,7 +110,6 @@ public abstract class Product {
     }
     public void showProduct()
     {
-        System.out.println("Reference"+reference);
         System.out.println("Product Name:"+name);
         System.out.println("Product Price:"+price);
         System.out.println("Quantity available :"+quantity);

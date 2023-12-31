@@ -7,7 +7,6 @@ public class Cart {
     private  ArrayList<Product> cartArrayList=new ArrayList<Product>();
     private  int nb=0;
     private double totalAmount=0;
-
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
@@ -23,7 +22,7 @@ public class Cart {
         boolean ok=true;
         for (Product i:cartArrayList)
         {
-            if ((i.getName()==a.getName()))
+            if ((Objects.equals(i.getName(), a.getName())))
             {
                 i.setQuantity(i.getQuantity()+a.getQuantity());
                 ok=false;
@@ -34,8 +33,6 @@ public class Cart {
         cartArrayList.add(a);
         nb++;
         }
-
-
     }
 
     public  void deleteItem(Product a) {

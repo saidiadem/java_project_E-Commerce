@@ -199,6 +199,15 @@ public class CartService {
                     scanner.nextLine();
                     return;
                 }
+
+                if (amountValue>Products.find(name))
+                {
+                    System.out.println("\u001B[31mThe quantity of "+name+" in your cart is more than the quantity in the inventory. \u001B[0m");
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                    return;
+                }
+
                 a.setQuantity(amountValue);
                 System.out.println("\u001B[32mAmount edited successfully!\u001B[0m");
                 System.out.println("\nPress Enter to continue...");

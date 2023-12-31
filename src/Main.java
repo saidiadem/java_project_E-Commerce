@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Admin admin = new Admin("admin", "admin");
         User user=new User("user","user");
         user.setToken(50);
         Product product1=new EntertainmentProduct(10,"product1",30);
@@ -19,8 +18,9 @@ public class Main {
         Products.addProduct(product2);
         Products.addProduct(product3);
         Products.addProduct(product4);
-        Users.addUser(admin);
         Users.addUser(user);
+        Admin admin = new Admin("admin", "admin");
+        Users.addUser(admin);
         MenuService.loginMenu();
     }}
 
